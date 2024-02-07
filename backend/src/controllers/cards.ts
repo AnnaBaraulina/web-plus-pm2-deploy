@@ -12,8 +12,8 @@ const getCards = (req: Request, res: Response, next: NextFunction) => {
     .catch(next);
 };
 
-const createCard = (req: Request, res: Response, next: NextFunction) => {
-  const owner = req.user._id;
+const createCard = (req: any, res: Response, next: NextFunction) => {
+  const owner = req.user_id;
   const { name, link } = req.body;
   Card.create({ name, link, owner })
     .then((card) => res.status(201).send(card))
@@ -26,7 +26,7 @@ const createCard = (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
-const deleteCard = (req: Request, res: Response, next: NextFunction) => {
+const deleteCard = (req: any, res: Response, next: NextFunction) => {
   const { id } = req.params;
   Card.findById(id)
     .orFail(() => new NotFoundError('Нет карточки по заданному id'))
@@ -41,7 +41,7 @@ const deleteCard = (req: Request, res: Response, next: NextFunction) => {
     .catch(next);
 };
 
-const updateLike = (req: Request, res: Response, next: NextFunction, method: string) => {
+const updateLike = (req: any, res: Response, next: NextFunction, method: string) => {
   const { params: { id } } = req;
   Card.findByIdAndUpdate(id, { [method]: { likes: req.user._id } }, { new: true })
     .orFail(() => new NotFoundError('Нет карточки по заданному id'))

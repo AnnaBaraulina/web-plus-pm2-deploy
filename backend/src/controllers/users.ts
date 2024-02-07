@@ -60,11 +60,11 @@ const getUser = (req: Request, res: Response, next: NextFunction) => {
   getUserData(req.params.id, res, next);
 };
 
-const getCurrentUser = (req: Request, res: Response, next: NextFunction) => {
+const getCurrentUser = (req: any, res: Response, next: NextFunction) => {
   getUserData(req.user._id, res, next);
 };
 
-const updateUserData = (req: Request, res: Response, next: NextFunction) => {
+const updateUserData = (req: any, res: Response, next: NextFunction) => {
   const { user: { _id }, body } = req;
   User.findByIdAndUpdate(_id, body, { new: true, runValidators: true })
     .orFail(() => new NotFoundError('Пользователь по заданному id отсутствует в базе'))

@@ -139,6 +139,6 @@ class Api {
   }
   }
   // Замените на адрес вашего бэкенда
-  const api = new Api('http://localhost:3005');
+  const api = new Api('https://api.aaa1.nomoredomainsmonster.ru/');
 
   export default api;
